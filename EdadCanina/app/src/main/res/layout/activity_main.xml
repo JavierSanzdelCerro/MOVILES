@@ -50,7 +50,7 @@
         android:id="@+id/texto_respuesta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Si fueras un perro tendrías 34 años"
+        tools:text="Si fueras un perro tendrías 34 años"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="#226B06"
