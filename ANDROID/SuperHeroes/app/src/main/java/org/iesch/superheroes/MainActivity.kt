@@ -24,25 +24,25 @@ import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var binding: ActivityMainBinding
-    // 1 - Creamos una variable que va a manejar el resultado de hacer hecho la foto
-    private lateinit var heroImage: ImageView
+    // 1 - Creamos una variable que va a manejar el resultado de haber hecho la foto
+    private lateinit var  heroImage: ImageView
     private var heroBitmap: Bitmap? = null
-    // 1- Hay que cambiar el TakepicuresPreview por Takepictures
-    /*private val getContent = registerForActivityResult(ActivityResultContracts.TakePicture()){
-        // Esto nos devuelve un BitMap
-        heroBitmap = bitmap
-        heroImage.setImageBitmap(heroBitmap)
-    }*/
+    // 1 - Hay que cambiar el TakepicturesPreview por takepictures
     private var picturePath = ""
-    private val getContent = registerForActivityResult(ActivityResultContracts.TakePicture()){
-        // En lugar de un BitMap nos va a devolver un booleano, si la foto es exitosa o no
+    private val getContent = registerForActivityResult(ActivityResultContracts.TakePicture() ){
+        // 1 - Ahora en lugar de un bitmap nos va a devolver un booleano, si la foto es exitosa o no
         success ->
-            if (success && picturePath.isNotEmpty()){
-                heroBitmap = BitmapFactory.decodeFile(picturePath)
+            if ( success && picturePath.isNotEmpty() ){
+                // cualquier imagen del directorio la podemos convertir a bitmap
+                heroBitmap = BitmapFactory.decodeFile( picturePath )
+                // Mostramos la imagen en el cuadradito
                 heroImage.setImageBitmap( heroBitmap )
             }
+
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,40 +61,39 @@ class MainActivity : AppCompatActivity() {
             abrirCamara()
         }
 
+
         binding.btnGuardar.setOnClickListener {
-            // Obtenemos los valores al momento de hacer click
             val superHeroName = binding.heroNameEdit.text.toString()
             val alterEgo = binding.alterEgoEdit.text.toString()
             val bio = binding.alterEgoEdit.text.toString()
             val power = binding.power.rating
-            // 2 - Me creo el objeto SuperHeroe
             val superHeroe = SuperHeroe(superHeroName,alterEgo,bio,power)
 
-
-
-            // Qué quiero hacer cuando pulso el Boton Guardar
             irADetailActivity(superHeroe)
         }
+
+
+
+
     }
 
     fun abrirCamara() {
-        // 2- Aqui debemos crear un path temporal para guardar esa imagen que acabamos de captar
+        // 2 - Aqui debemos crear un path temporal para guardar esa imagen
         val imageFile = crearImagenFile()
 
-        // Ahora ya tenemos el File, pero lo que necesitamos es el URI
-        // Será a traves del FileProvider
-        // FileProvider lo  que hace es compartir el file con otras aplicaciones de forma segura
-
-        val uri = FileProvider.getUriForFile(this, "${applicationContext.packageName}.provider", imageFile)
+        // Ahora ya tenemos el File, pero lo que necesitamos es el uri
+        // Sera a traves del FileProvider
+        // FileProvider lo que hace es compartir el file con otras aplicaciones de forma segura
+        val uri = FileProvider.getUriForFile( this, "${applicationContext.packageName}.provider", imageFile)
         getContent.launch(uri)
     }
 
-    // 3- Esta funcion crea un objeto de tipo File y de ese File recuperaremos la URI
+    //3 - Esta funcion crea un File y de ese File recuperaremos la uri
     private fun crearImagenFile() : File {
         val fileName = "superhero_image"
-        // Esto sera el directorio donde vamos a almacenar la imagen... por defecto es DIRECTORY_PICTURES
+        // Esto será el directorio donde vamos a almacenar la image.. Por defecto es DIRECTORY_PICTURES
         val fileDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        // Creamos nuestro File, aqui nos pide el nombre, el formato y el directorio
+        // Creamos nuestro file, aqui nos pide el nombre, el formato, y el directorio
         val imageFile = File.createTempFile(fileName, ".jpg", fileDirectory)
         // Ahora ya podemos guardar la ruta (path) en la variable global
         picturePath = imageFile.absolutePath
@@ -110,8 +109,8 @@ class MainActivity : AppCompatActivity() {
         //intent.putExtra("bio", bio)
         //intent.putExtra("power",power)
         intent.putExtra( "superHero", superHeroe )
-        //Añado el Objeto Bitmap al intent
-        intent.putExtra("foto_heroe", picturePath)
+        // Añado el Objeto Bitmap al intent
+        intent.putExtra("path_heroe", picturePath )
         // De esta manera, todos estos datos se enviarán al DetailActivity
         // Iniciamos la nueva actividad
         startActivity(intent)

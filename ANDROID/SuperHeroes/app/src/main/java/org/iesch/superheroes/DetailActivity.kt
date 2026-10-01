@@ -27,23 +27,20 @@ class DetailActivity : AppCompatActivity() {
             insets
         }
 
-        // 1- Recibimos el Objeto SuperHeroe del Intent
-
-        val superHeroe = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU ){
+        // 1 - Recibimos el Objeto SuperHeroe del Intent
+        val superHeroe = if ( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU ){
             // Para versiones SDK 33 o superiores
             intent.getParcelableExtra("superHero", SuperHeroe::class.java)
-
-        }else{
-            // Para versiones anteriores a la 33
+        } else {
+            //Para versiones anteriores a la 33
             intent.getParcelableExtra<SuperHeroe>("superHero")
         }
 
         // Ultimo paso: Recibimos los datos del Main Activity
         val bundle = intent.extras!!
         // val bitmap = bundle.getParcelable<Bitmap>("foto_heroe")
-        val bitmapDirectory = bundle.getString("foto_heroe")
+        val bitmapDirectory = bundle.getString("path_heroe")
         val bitmap = BitmapFactory.decodeFile(bitmapDirectory)
-
 
         // val superHeroName = bundle.getString("superHeroName") ?: "No hay nombre"
         // val alterEgo = bundle.getString("alterEgo") ?: "No hay AlterEgo"
@@ -52,12 +49,12 @@ class DetailActivity : AppCompatActivity() {
 
         // Rellenamos los campos conlos valores recibidos
         binding.heroNameTv.text = superHeroe?.nombre ?: "No hay nombre"
-        binding.alterEgoResult.text = superHeroe?.alterEgo ?: "No hay alterEgo"
+        binding.alterEgoResult.text = superHeroe?.alterEgo ?: "No hay AlterEgo"
         binding.bioResult.text = superHeroe?.bio ?: "No hay bio"
         binding.ratingResult.rating = superHeroe?.power ?: 0f
 
-        // Asigno la imagen a la ImageView
-        binding.imagenHeroDetail.setImageBitmap(bitmap)
+        // Asigno la imagen a la imageView
+        binding.imagenHeroeDetail.setImageBitmap( bitmap )
     }
 }
 

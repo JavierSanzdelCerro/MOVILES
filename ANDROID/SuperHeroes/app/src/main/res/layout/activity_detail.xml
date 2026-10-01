@@ -9,9 +9,9 @@
 
 
     <ImageView
-        android:id="@+id/imagenHeroDetail"
+        android:id="@+id/imagenHeroeDetail"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="280dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagenHeroDetail" />
+        app:layout_constraintTop_toBottomOf="@+id/imagenHeroeDetail" />
     <TextView
         android:id="@+id/alterEgoText"
         android:layout_width="wrap_content"
