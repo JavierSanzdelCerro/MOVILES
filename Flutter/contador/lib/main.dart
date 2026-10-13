@@ -1,3 +1,5 @@
+
+import 'package:contador/presentation/screens/contador_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,14 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       
-      home: Scaffold(
-        body: Center(
-          child: Text('Hola a DAM 2'),
-        ),
-      ),
+      home: ContadorScreen()
     );
   }
-
-  
 
 }
