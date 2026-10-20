@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dog Age</string>
+    <string name="pregunta_edad">Quel âge avez-vous ?</string>
+    <string name="introduce_tu_edad">Votre âge</string>
+    <string name="calcular">Calculer</string>
+    <string name="resultado_texto">Si vous étiez un chien, vous auriez %d ans.</string>
+    <string name="texto_toast">Vous devez saisir un âge.</string>
+</resources>
